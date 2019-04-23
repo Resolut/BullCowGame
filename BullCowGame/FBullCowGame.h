@@ -1,6 +1,8 @@
 #pragma once
+
 #include <string>
 
+// to make the syntax Unreal friendly
 using FString = std::string;
 using int32 = int;
 
@@ -36,7 +38,6 @@ public:
 
 private:
 	int32 MyCurrentTry;
-	int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 
