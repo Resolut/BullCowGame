@@ -1,7 +1,10 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include "FBullCowGame.h"
 
+// to make the syntax Unreal friendly
 using FText = std::string;
 using int32 = int;
 
@@ -25,7 +28,6 @@ int main()
 	return 0; // exit application
 }
 
-// introduce the game
 void PrintIntro()
 {
 	std::cout << "\nWelcome to Bulls and Cows, a fun word game.\n";
@@ -53,6 +55,8 @@ void PlayGame()
 	}
 
 	PrintGameSummary();
+
+	return;
 }
 
 // loop continually until the user gives a valid guess
@@ -62,25 +66,25 @@ FText GetValidGuess()
 	FText Guess = "";
 	do {
 		// get a guess from the player
-		std::cout << "Try" << BCGame.GetCurrentTry() << ". Enter your guess: ";
+		std::cout << "Try " << BCGame.GetCurrentTry() <<" of "<< BCGame.GetMaxTries() << ". Enter your guess: ";
 		std::getline(std::cin, Guess);
 
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status)
 		{
 		case EGuessStatus::Wrong_Length:
-			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n";
+			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n\n";
 			break;
 		case EGuessStatus::Not_Isogram:
-			std::cout << "Please enter a word with unique letters.\n";
+			std::cout << "Please enter a word with unique letters.\n\n";
 			break;
 		case EGuessStatus::Not_LowerCase:
-			std::cout << "Please enter a word in lower case.\n";
+			std::cout << "Please enter a word in lower case.\n\n";
 			break;
 		default:
 			break;
 		}
-		std::cout << std::endl;
+
 	} while (Status != EGuessStatus::OK); // keep looping until we get no errors
 
 	return Guess;
@@ -101,4 +105,6 @@ void PrintGameSummary()
 		std::cout << "YOU WIN! CONGRATULATIONS!"<< std::endl;
 	else
 		std::cout << "YOU LOSE! Maybe, you will luck next time!" << std::endl;
+
+	return;
 }
